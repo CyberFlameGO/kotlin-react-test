@@ -1,8 +1,10 @@
 package mysticfall.kotlin.react.test
 
+import csstype.ClassName
+import kotlinx.js.jso
 import react.*
-import react.dom.div
-import react.dom.h1
+import react.dom.html.ReactHTML.div
+import react.dom.html.ReactHTML.h1
 
 external interface TestProps : Props {
     var name: String
@@ -12,37 +14,42 @@ external interface TestState : State {
     var name: String
 }
 
-val TestFuncComponent = fc<TestProps> { props ->
+val TestFuncComponent = FC<TestProps> { props ->
     val (name, setName) = useState(props.name)
 
     useEffect(name) {
         setName("Updated: ${props.name}")
     }
 
-    div(classes = "test-component") {
-        h1(classes = "title") {
+    div {
+        className = ClassName("test-component")
+        h1 {
+            className = ClassName("title")
             +name
         }
     }
 }
 
-class TestClassComponent(props: TestProps) : RComponent<TestProps, TestState>(props) {
+class TestClassComponent(props: TestProps) : Component<TestProps, TestState>(props) {
 
-    override fun TestState.init(props: TestProps) {
-        name = props.name
+    init {
+        state = jso { name = props.name }
     }
 
     override fun componentDidMount() {
-        setState {
-            name = "Updated: ${props.name}"
-        }
+        setState({
+            it.name = "Updated: ${props.name}"
+            it
+        })
     }
 
-    override fun RBuilder.render() {
-        div(classes = "test-component") {
-            h1(classes = "title") {
-                +state.name
+    override fun render() = FC<TestProps> {
+        div {
+            className = ClassName("test-component")
+            h1 {
+                className = ClassName("title")
+                +it.name
             }
         }
-    }
+    }.create { name = state.name }
 }
