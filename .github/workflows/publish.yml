@@ -23,18 +23,17 @@ jobs:
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
 
-      - name: Perform Tests
-        run: gradle check
-
       - name: Import GPG Key
         uses: crazy-max/ghaction-import-gpg@v5
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
-          fingerprint: 3C146520C52DAA5DF99803D88E7369635649FB20
           git_user_signingkey: true
           git_commit_gpgsign: true
           git_config_global: true
+
+      - name: Perform Tests
+        run: gradle check
 
       - name: Publish
         uses: uTen2c/publish-to-github@v1
