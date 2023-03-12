@@ -1,5 +1,5 @@
-![Build](https://github.com/mysticfall/kotlin-react-test/workflows/publish-snapshot/badge.svg)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.mysticfall/kotlin-react-test)](https://mvnrepository.com/artifact/io.github.mysticfall/kotlin-react-test)
+![Build](https://img.shields.io/github/actions/workflow/status/turtton/kotlin-react-test/publish.yml?style=flat-square)
+<img alt="Maven metadata URL" src="https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fmaven.turtton.net%2Fio%2Fgithub%2Fmysticfall%2Fkotlin-react-test%2Fmaven-metadata.xml&style=flat-square">
 
 # Kotlin API for React Test Renderer
 
@@ -12,13 +12,25 @@ which can be used to unit test React components in a Kotlin/JS project.
 
 With Gradle (using Kotlin DSL):
 ```kotlin
-implementation("io.github.mysticfall:kotlin-react-test:1.2.0")
+repositories {
+    maven("https://maven.turtton.net")
+}
+
+dependencies {
+    implementation("io.github.mysticfall:kotlin-react-test:$version")
+}
 ```
 
 Alternatively, using Groovy DSL:
 
 ```groovy
-implementation "io.github.mysticfall:kotlin-react-test:1.2.0"
+repositories {
+    maven "https://maven.turtton.net"
+}
+
+dependencies {
+    implementation "io.github.mysticfall:kotlin-react-test:$version"
+}
 ```
 
 ### Code Example
@@ -35,9 +47,7 @@ class ComponentTest : ReactTestSupport {
     fun testHeaderTitle() {
         val renderer = render {
             HeaderTitle {
-                attrs {
-                    title = "Kotlin/JS"
-                }
+                title = "Kotlin/JS"
             }
         }
 
