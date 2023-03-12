@@ -2,12 +2,13 @@ plugins {
     kotlin("js") version "1.8.10"
 
     id("maven-publish")
-
-    signing
 }
 
+val kotlinWrapperVersion = project.property("version.wrappers") as String
+val reactVersion = project.property("version.react") as String
+val buildNumber = System.getenv("GITHUB_RUN_NUMBER")?.toInt()?.plus(7) ?: "local"
 group = "io.github.mysticfall"
-version = "1.3.0-SNAPSHOT"
+version = "$reactVersion-$kotlinWrapperVersion+build.$buildNumber"
 
 val isReleasedVersion = !project.version.toString().endsWith("-SNAPSHOT")
 
@@ -19,9 +20,7 @@ fun versionOf(name: String, isWrapper: Boolean = true): String {
     val artifact = project.property("version.$name") as String
 
     return if (isWrapper) {
-        val wrapper = project.property("version.wrappers") as String
-
-        "$artifact-$wrapper"
+        "$artifact-$kotlinWrapperVersion"
     } else {
         artifact
     }
@@ -37,7 +36,7 @@ dependencies {
 }
 
 kotlin {
-    js(BOTH) {
+    js(IR) {
         nodejs {
             testTask {
                 useMocha()
@@ -65,7 +64,7 @@ publishing {
                     "Kotlin wrapper for React Test Renderer, which can be used " +
                             "to unit test React components in a Kotlin/JS project."
                 )
-                url.set("https://github.com/mysticfall/kotlin-react-test")
+                url.set("https://github.com/turtton/kotlin-react-test")
 
                 licenses {
                     license {
@@ -80,39 +79,28 @@ publishing {
                         name.set("Xavier Cho")
                         email.set("mysticfallband@gmail.com")
                     }
+                    developer {
+                        id.set("turtton")
+                        name.set("turtton")
+                        email.set("tiny.idea1859@turtton.net")
+                    }
                 }
 
                 scm {
-                    connection.set("scm:git:git://github.com/mysticfall/kotlin-react-test.git")
-                    developerConnection.set("scm:git:git@github.com:mysticfall/kotlin-react-test.git")
-                    url.set("https://github.com/mysticfall/kotlin-react-test")
+                    connection.set("scm:git:git://github.com/turtton/kotlin-react-test.git")
+                    developerConnection.set("scm:git:git@github.com:turtton/kotlin-react-test.git")
+                    url.set("https://github.com/turtton/kotlin-react-test")
                 }
             }
         }
     }
 
     repositories {
-        maven {
-            name = "ossrh"
-            url = uri(
-                if (isReleasedVersion) {
-                    "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-                } else {
-                    "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-                }
-            )
-
-            credentials(PasswordCredentials::class)
+        val targetPath = System.getenv("PUBLISH_PATH")
+        if (targetPath != null) {
+            maven {
+                url = uri(targetPath)
+            }
         }
     }
-}
-
-signing {
-    setRequired({
-        gradle.taskGraph.hasTask("publish")
-    })
-
-    useGpgCmd()
-
-    sign(publishing.publications)
 }
