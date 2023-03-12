@@ -1,7 +1,5 @@
 name: publish-snapshot
 on:
-  push:
-    branches: [ main ]
   release:
     types:
       - created
