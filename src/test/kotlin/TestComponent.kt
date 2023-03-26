@@ -1,7 +1,7 @@
 package mysticfall.kotlin.react.test
 
 import csstype.ClassName
-import kotlinx.js.jso
+import js.core.jso
 import react.*
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.h1

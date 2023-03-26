@@ -2,7 +2,7 @@
 
 package mysticfall.kotlin.react.test
 
-import kotlinx.js.jso
+import js.core.jso
 import react.ChildrenBuilder
 import react.FC
 import react.Props

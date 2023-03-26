@@ -2,7 +2,6 @@
 
 package mysticfall.kotlin.react.test
 
-import kotlinext.js.require
 import react.Component
 import react.ReactNode
 import kotlin.js.Json
@@ -29,10 +28,12 @@ class RootFixedTestRenderer(private val testRenderer: TestRenderer): TestRendere
     override val root: TestInstance<*> by lazy { testRenderer.root.children.first() }
 }
 
+@JsModule("react-test-renderer")
+@JsNonModule
+external val renderer: dynamic
+
 //TODO Until we have https://youtrack.jetbrains.com/issue/KT-39602
 object TestRendererGlobal {
-
-    private val renderer = require("react-test-renderer")
 
     fun create(node: ReactNode): TestRenderer = renderer.create(node).unsafeCast<TestRenderer>().fix()
 

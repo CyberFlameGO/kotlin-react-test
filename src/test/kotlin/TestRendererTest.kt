@@ -1,15 +1,13 @@
 package mysticfall.kotlin.react.test
 
 import csstype.ClassName
-import kotlinext.js.asJsObject
-import org.w3c.dom.Element
 import react.*
 import react.dom.html.ReactHTML.div
+import web.dom.Element
 import kotlin.js.json
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
-import kotlin.test.assertTrue
 
 class TestRendererTest : ReactTestSupport {
 
