@@ -55,15 +55,6 @@ kotlin {
 publishing {
     publications {
         withType<MavenPublication>().configureEach {
-            from(components["kotlin"])
-
-            if (tasks.names.contains("jsSourcesJar")) {
-                artifact(tasks.getByName<Zip>("jsSourcesJar"))
-            }
-
-            if (tasks.names.contains("jsIrSourcesJar")) {
-                artifact(tasks.getByName<Zip>("jsIrSourcesJar"))
-            }
 
             pom {
                 name.set("Kotlin API for React Test Renderer")
