@@ -6,7 +6,7 @@ plugins {
 
 val kotlinWrapperVersion = project.property("version.wrappers") as String
 val reactVersion = project.property("version.react") as String
-val buildNumber = System.getenv("GITHUB_RUN_NUMBER")?.toInt()?.plus(7) ?: "local"
+val buildNumber = System.getenv("GITHUB_RUN_NUMBER")?.toInt()?.plus(1) ?: "local"
 group = "net.cyberflame.kotlin-react-test"
 version = "$reactVersion-$kotlinWrapperVersion+build.$buildNumber"
 
@@ -40,6 +40,7 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react:${versionOf("react")}")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:${versionOf("react")}")
+                implementation(npm("react-test-renderer", versionOf("react", isWrapper = false)))
             }
         }
 

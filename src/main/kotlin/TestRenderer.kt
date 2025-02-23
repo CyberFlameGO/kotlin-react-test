@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package mysticfall.kotlin.react.test
+package cyberflame.kotlin.react.test
 
 import react.Component
 import react.ReactNode

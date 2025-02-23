@@ -1,4 +1,4 @@
-package mysticfall.kotlin.react.test
+package cyberflame.kotlin.react.test
 
 import csstype.ClassName
 import react.*
