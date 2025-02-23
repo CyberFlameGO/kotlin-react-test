@@ -27,6 +27,7 @@ fun versionOf(name: String, isWrapper: Boolean = true): String {
 }
 
 kotlin {
+    withSourcesJar(publish = false)
     js(IR) {
         nodejs {
             testTask {
@@ -34,7 +35,6 @@ kotlin {
             }
         }
     }
-    target.publications { }
 
     sourceSets {
         val jsMain by getting {
