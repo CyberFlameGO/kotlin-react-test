@@ -23,24 +23,15 @@ jobs:
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
 
-      - name: Import GPG Key
-        uses: crazy-max/ghaction-import-gpg@v5
-        with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
-          fingerprint: E271D44F050673439B52E4A48152FC5D0B5A76E1
-          git_user_signingkey: true
-          git_commit_gpgsign: true
-          git_config_global: true
 
       - name: Perform Tests
         run: gradle check
 
       - name: Publish
-        uses: uTen2c/publish-to-github@v1
+        uses: uTen2c/publish-to-github@v1.2
         with:
-          repo: turtton/maven-repo
-          token-user: turtton
+          repo: CyberFlameGO/maven-repo
+          token-user: cyberflamego
           token: ${{ secrets.TOKEN }}
-          commit-user-name: turtton
-          commit-user-email: "top.gear7509@turtton.net"
+          commit-user-name: Cyber (Actions Push)
+          commit-user-email: "cyberflameu@gamil.com"
