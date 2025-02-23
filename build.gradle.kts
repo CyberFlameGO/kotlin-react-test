@@ -7,7 +7,7 @@ plugins {
 val kotlinWrapperVersion = project.property("version.wrappers") as String
 val reactVersion = project.property("version.react") as String
 val buildNumber = System.getenv("GITHUB_RUN_NUMBER")?.toInt()?.plus(1) ?: "local"
-group = "net.cyberflame.kotlin-react-test"
+group = "net.cyberflame"
 version = "$reactVersion-$kotlinWrapperVersion+build.$buildNumber"
 
 val isReleasedVersion = !project.version.toString().endsWith("-SNAPSHOT")
