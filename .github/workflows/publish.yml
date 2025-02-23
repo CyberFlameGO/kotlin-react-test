@@ -33,5 +33,5 @@ jobs:
           repo: CyberFlameGO/maven-repo
           token-user: cyberflamego
           token: ${{ secrets.TOKEN }}
-          commit-user-name: Cyber (Actions Push)
+          commit-user-name: "Cyber (Actions Push)"
           commit-user-email: "cyberflameu@gamil.com"
