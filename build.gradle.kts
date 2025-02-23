@@ -54,7 +54,7 @@ kotlin {
 
 publishing {
     publications {
-        create<MavenPublication>("main") {
+        withType<MavenPublication>().configureEach {
             from(components["kotlin"])
 
             if (tasks.names.contains("jsSourcesJar")) {
