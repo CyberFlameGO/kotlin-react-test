@@ -34,4 +34,4 @@ jobs:
           token-user: cyberflamego
           token: ${{ secrets.TOKEN }}
           commit-user-name: "Cybers_Actions_Push"
-          commit-user-email: "cyberflameu@gamil.com"
+          commit-user-email: "cyberflameu@gmail.com"
