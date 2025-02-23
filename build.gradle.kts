@@ -34,6 +34,7 @@ kotlin {
             }
         }
     }
+    target.publications { }
 
     sourceSets {
         val jsMain by getting {
@@ -54,7 +55,17 @@ kotlin {
 
 publishing {
     publications {
-        withType<MavenPublication>().configureEach {
+         create<MavenPublication>("main") {
+
+            from(components["kotlin"])
+
+            if (tasks.names.contains("jsSourcesJar")) {
+                artifact(tasks.getByName<Zip>("jsSourcesJar"))
+            }
+
+            if (tasks.names.contains("jsIrSourcesJar")) {
+                artifact(tasks.getByName<Zip>("jsIrSourcesJar"))
+            }
 
             pom {
                 name.set("Kotlin API for React Test Renderer")
