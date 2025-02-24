@@ -27,7 +27,7 @@ fun versionOf(name: String, isWrapper: Boolean = true): String {
 }
 
 kotlin {
-    withSourcesJar(publish = false)
+    // withSourcesJar(publish = false)
     js(IR) {
         nodejs {
             testTask {
@@ -55,16 +55,15 @@ kotlin {
 
 publishing {
     publications {
+         tasks.withType<GenerateModuleMetadata>().configureEach {
+            enabled = false
+         }
          create<MavenPublication>("main") {
 
-            from(components["kotlin"])
+            artifactId = "kotlin-react-test"
 
-            if (tasks.names.contains("jsSourcesJar")) {
-                artifact(tasks.getByName<Zip>("jsSourcesJar"))
-            }
-
-            if (tasks.names.contains("jsIrSourcesJar")) {
-                artifact(tasks.getByName<Zip>("jsIrSourcesJar"))
+            artifact(tasks.getByName<Jar>("jsJar")) {
+                classifier = ""
             }
 
             pom {
